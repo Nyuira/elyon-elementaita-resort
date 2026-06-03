@@ -4,7 +4,7 @@ export const RESORT = {
   description: "A sanctuary where the ancient rhythms of the Great Rift Valley meet curated luxury. Perched along the serene shores of UNESCO World Heritage-listed Lake Elementaita.",
   address:     "G7PP+QG3, Mbaruk, Kanyawa, Nakuru County, Kenya",
   coordinates: { lat: -0.4900, lng: 36.2400 },
-  phone:       "+254 700 000 000",
+  phone:       "+254 700 000 000", // ← CHANGE THIS to your real number
   email:       "reservations@elyonelementaitaresort.com",
   instagram:   "@ElyonElementaita",
   facebook:    "ElyonElementaitaResort",
