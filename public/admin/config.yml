@@ -19,14 +19,14 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Room Name", name: "title", widget: "string" }
-      - { label: "Price per Night (KES)", name: "price", widget: "number" }
-      - { label: "Capacity / Max Guests", name: "capacity", widget: "string" }
-      - { label: "Bed Configuration", name: "bedType", widget: "string" }
-      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Room Name", name: "title", widget: "string", required: true }
+      - { label: "Price per Night (KES)", name: "price", widget: "number", required: false }
+      - { label: "Capacity / Max Guests", name: "capacity", widget: "string", required: false }
+      - { label: "Bed Configuration", name: "bedType", widget: "string", required: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Room Gallery", name: "gallery", widget: "list", field: { label: "Image", name: "photo", widget: "image" }, required: false }
-      - { label: "Amenities", name: "amenities", widget: "list" }
-      - { label: "Description", name: "body", widget: "markdown" }
+      - { label: "Amenities", name: "amenities", widget: "list", required: false }
+      - { label: "Description", name: "body", widget: "markdown", required: false }
 
   # 2. DINING & RESTAURANT
   - name: "dining"
@@ -35,11 +35,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Meal Category / Dish Name", name: "title", widget: "string" }
+      - { label: "Meal Category / Dish Name", name: "title", widget: "string", required: true }
       - { label: "Price (KES)", name: "price", widget: "number", required: false }
       - { label: "Meal Time / Service Hours", name: "hours", widget: "string", required: false }
-      - { label: "Food Image", name: "image", widget: "image" }
-      - { label: "Description", name: "body", widget: "markdown" }
+      - { label: "Food Image", name: "image", widget: "image", required: false }
+      - { label: "Description", name: "body", widget: "markdown", required: false }
 
   # 3. EXPERIENCES & ACTIVITIES
   - name: "experiences"
@@ -48,11 +48,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Activity Name", name: "title", widget: "string" }
-      - { label: "Duration / Schedule", name: "duration", widget: "string" }
-      - { label: "Activity Image", name: "image", widget: "image" }
+      - { label: "Activity Name", name: "title", widget: "string", required: true }
+      - { label: "Duration / Schedule", name: "duration", widget: "string", required: false }
+      - { label: "Activity Image", name: "image", widget: "image", required: false }
       - { label: "Highlights", name: "highlights", widget: "list", required: false }
-      - { label: "Detailed Description", name: "body", widget: "markdown" }
+      - { label: "Detailed Description", name: "body", widget: "markdown", required: false }
 
   # 4. EVENT PACKAGES & RETREATS
   - name: "packages"
@@ -61,11 +61,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Package Name", name: "title", widget: "string" }
+      - { label: "Package Name", name: "title", widget: "string", required: true }
       - { label: "Starting Price (KES)", name: "price", widget: "number", required: false }
-      - { label: "Banner Image", name: "image", widget: "image" }
-      - { label: "Inclusions", name: "inclusions", widget: "list" }
-      - { label: "Description", name: "body", widget: "markdown" }
+      - { label: "Banner Image", name: "image", widget: "image", required: false }
+      - { label: "Inclusions", name: "inclusions", widget: "list", required: false }
+      - { label: "Description", name: "body", widget: "markdown", required: false }
 
   # 5. RESORT PHOTO GALLERY
   - name: "gallery"
@@ -74,11 +74,11 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Image Title / Caption", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Grounds", "Rooms", "Dining", "Events", "Activities"] }
-      - { label: "Upload Image", name: "image", widget: "image" }
+      - { label: "Image Title / Caption", name: "title", widget: "string", required: true }
+      - { label: "Category", name: "category", widget: "select", options: ["Grounds", "Rooms", "Dining", "Events", "Activities"], required: false }
+      - { label: "Upload Image", name: "image", widget: "image", required: false }
 
-  # 6. SITE SETTINGS & CONTACT INFO
+  # 6. SITE SETTINGS & CONTACT INFO (ALL FIELDS OPTIONAL)
   - name: "settings"
     label: "Site Info & Contact Details"
     files:
@@ -86,12 +86,12 @@ collections:
         name: "general"
         file: "content/settings/general.json"
         fields:
-          - { label: "Hero Main Heading", name: "heroTitle", widget: "string" }
-          - { label: "Hero Subtitle Text", name: "heroSubtitle", widget: "string" }
-          - { label: "Main Phone Number", name: "phone", widget: "string" }
-          - { label: "WhatsApp Booking Number", name: "whatsapp", widget: "string" }
-          - { label: "Official Email Address", name: "email", widget: "string" }
-          - { label: "Physical Address", name: "address", widget: "string" }
+          - { label: "Hero Main Heading", name: "heroTitle", widget: "string", required: false }
+          - { label: "Hero Subtitle Text", name: "heroSubtitle", widget: "string", required: false }
+          - { label: "Main Phone Number", name: "phone", widget: "string", required: false }
+          - { label: "WhatsApp Booking Number", name: "whatsapp", widget: "string", required: false }
+          - { label: "Official Email Address", name: "email", widget: "string", required: false }
+          - { label: "Physical Address", name: "address", widget: "string", required: false }
           - { label: "Facebook Page Link", name: "facebook", widget: "string", required: false }
           - { label: "Instagram Link", name: "instagram", widget: "string", required: false }
           - { label: "TikTok Link", name: "tiktok", widget: "string", required: false }
