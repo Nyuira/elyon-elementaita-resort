@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Nyuira/elyon-elementaita-resort
   branch: main
-  base_url: https://elyon-elementaita-resort.pages.dev
+  base_url: https://elyonelementaitaresort.com
   auth_endpoint: /api/auth
 
 media_folder: "public/images/uploads"
