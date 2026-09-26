@@ -5,10 +5,14 @@ backend:
   base_url: https://elyonelementaitaresort.com
   auth_endpoint: /api/auth
 
+site_url: https://elyonelementaitaresort.com
+display_url: https://elyonelementaitaresort.com
+
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  # 1. ROOMS & ACCOMMODATION
   - name: "rooms"
     label: "Rooms & Accommodation"
     folder: "content/rooms"
@@ -17,6 +21,77 @@ collections:
     fields:
       - { label: "Room Name", name: "title", widget: "string" }
       - { label: "Price per Night (KES)", name: "price", widget: "number" }
+      - { label: "Capacity / Max Guests", name: "capacity", widget: "string" }
+      - { label: "Bed Configuration", name: "bedType", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Room Gallery", name: "gallery", widget: "list", field: { label: "Image", name: "photo", widget: "image" }, required: false }
       - { label: "Amenities", name: "amenities", widget: "list" }
       - { label: "Description", name: "body", widget: "markdown" }
+
+  # 2. DINING & RESTAURANT
+  - name: "dining"
+    label: "Dining & Cuisine"
+    folder: "content/dining"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Meal Category / Dish Name", name: "title", widget: "string" }
+      - { label: "Price (KES)", name: "price", widget: "number", required: false }
+      - { label: "Meal Time / Service Hours", name: "hours", widget: "string", required: false }
+      - { label: "Food Image", name: "image", widget: "image" }
+      - { label: "Description", name: "body", widget: "markdown" }
+
+  # 3. EXPERIENCES & ACTIVITIES
+  - name: "experiences"
+    label: "Experiences & Activities"
+    folder: "content/experiences"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Activity Name", name: "title", widget: "string" }
+      - { label: "Duration / Schedule", name: "duration", widget: "string" }
+      - { label: "Activity Image", name: "image", widget: "image" }
+      - { label: "Highlights", name: "highlights", widget: "list", required: false }
+      - { label: "Detailed Description", name: "body", widget: "markdown" }
+
+  # 4. EVENT PACKAGES & RETREATS
+  - name: "packages"
+    label: "Event & Group Packages"
+    folder: "content/packages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Package Name", name: "title", widget: "string" }
+      - { label: "Starting Price (KES)", name: "price", widget: "number", required: false }
+      - { label: "Banner Image", name: "image", widget: "image" }
+      - { label: "Inclusions", name: "inclusions", widget: "list" }
+      - { label: "Description", name: "body", widget: "markdown" }
+
+  # 5. RESORT PHOTO GALLERY
+  - name: "gallery"
+    label: "Photo Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Image Title / Caption", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Grounds", "Rooms", "Dining", "Events", "Activities"] }
+      - { label: "Upload Image", name: "image", widget: "image" }
+
+  # 6. SITE SETTINGS & CONTACT INFO
+  - name: "settings"
+    label: "Site Info & Contact Details"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - { label: "Hero Main Heading", name: "heroTitle", widget: "string" }
+          - { label: "Hero Subtitle Text", name: "heroSubtitle", widget: "string" }
+          - { label: "Main Phone Number", name: "phone", widget: "string" }
+          - { label: "WhatsApp Booking Number", name: "whatsapp", widget: "string" }
+          - { label: "Official Email Address", name: "email", widget: "string" }
+          - { label: "Physical Address", name: "address", widget: "string" }
+          - { label: "Facebook Page Link", name: "facebook", widget: "string", required: false }
+          - { label: "Instagram Link", name: "instagram", widget: "string", required: false }
+          - { label: "TikTok Link", name: "tiktok", widget: "string", required: false }
