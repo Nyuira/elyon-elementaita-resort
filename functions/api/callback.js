@@ -5,36 +5,53 @@ export async function onRequest(context) {
   const clientId = context.env.OAUTH_GITHUB_CLIENT_ID;
   const clientSecret = context.env.OAUTH_GITHUB_CLIENT_SECRET;
 
-  const response = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "User-Agent": "Cloudflare-Pages"
-    },
-    body: JSON.stringify({
-      client_id: clientId,
-      client_secret: clientSecret,
-      code: code
-    })
-  });
+  try {
+    const response = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "Cloudflare-Pages"
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code: code
+      })
+    });
 
-  const data = await response.json();
-  const token = data.access_token;
+    const data = await response.json();
+    const token = data.access_token;
 
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <body>
-        <script>
-          window.opener.postMessage('authorization:github:success:${JSON.stringify({ token: token, provider: "github" })}', '*');
-          window.close();
-        </script>
-      </body>
-    </html>
-  `;
+    if (!token) {
+      return new Response("Authentication failed: No access token returned from GitHub.", { status: 400 });
+    }
 
-  return new Response(html, {
-    headers: { "Content-Type": "text/html" }
-  });
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <script>
+            (function() {
+              function receiveMessage(e) {
+                console.log("Received message:", e);
+                window.opener.postMessage(
+                  'authorization:github:success:${JSON.stringify({ token: token, provider: "github" })}',
+                  e.origin
+                );
+              }
+              window.addEventListener("message", receiveMessage, false);
+              window.opener.postMessage("authorizing:github", "*");
+            })();
+          </script>
+        </body>
+      </html>
+    `;
+
+    return new Response(html, {
+      headers: { "Content-Type": "text/html" }
+    });
+  } catch (err) {
+    return new Response(err.message, { status: 500 });
+  }
 }
